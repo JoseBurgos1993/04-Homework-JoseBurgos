@@ -9,6 +9,7 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- Header -->
     <header>
         <container>
             <row>
@@ -18,20 +19,30 @@
     </header>
 
     <hr size=2>
-
+    <!---->
     
-
+    <!-- Main content that will dynamically change -->
     <content>
         <container>
             <row>
-                <div class="col-md-12"><h2>You think that you can beat my quiz?</h2></div>
+                <div class="col-md-12"><h2 id="question">You think that you can beat my quiz?</h2></div>
             </row>
             <row>
-                <button id="startBtn" class="btn btn-danger btn-lg grow-button">START</button>
+                <div class="buttonRow" style="text-align: center;">
+                    <button id="startBtn" class="btn btn-danger btn-lg">START</button>
+                    <button id="scoreBtn" class="btn btn-primary btn-lg">HIGHSCORES</button></div>
+                </div>
+                <div style="visibility: hidden;"><h3 id="startTimer"></h3></div>
             </row>
         </container>
     </content>
+    <!---->
 
+    <!-- Footer -->
+    <footer>
+        <p> &copy; 2020 Jose Burgos </p>
+    </footer>
+    <!---->
 
     <script src="./script.js"></script>
 </body>

@@ -11,9 +11,25 @@ h2{
     text-align: center;
     margin-top: 5%;
 }
-#startBtn{
+.buttonRow{
     margin-top: 5%;
-    margin-left: 45%;
-    margin-right: 45%;
-    width: 10%;
+}
+#startTimer{
+    width: 100%;
+    text-align: center;
+}
+#startBtn{
+    width: 40%;
+}
+#scoreBtn{
+    width: 40%;
+}
+footer {
+    margin-top: 15%;
+    padding: 30px;
+    clear: both;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+    background-color: darkslateblue;
+    color: gainsboro;
 }
