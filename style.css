@@ -1,0 +1,19 @@
+header{
+    background-color: darkslateblue;
+    padding-top: 3%;
+    padding-bottom: 3%
+}
+h1{
+    text-align: center;
+    color: whitesmoke;
+}
+h2{
+    text-align: center;
+    margin-top: 5%;
+}
+#startBtn{
+    margin-top: 5%;
+    margin-left: 45%;
+    margin-right: 45%;
+    width: 10%;
+}
