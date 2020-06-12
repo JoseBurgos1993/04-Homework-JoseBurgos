@@ -9,68 +9,132 @@
     <title>Document</title>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <container>
-            <row>
-                <div class="col-md-12"><h1>~ TIMED QUIZ ~</h1></div>
-            </row>
-        </container> 
-    </header>
-
-    <hr size=2>
-    <!---->
-    
-    <!-- Main content that will dynamically change -->
-    <!-- Main Menu -->
-    <content class = "mainmenu">
-        <container>
-            <row>
-                <div class="col-md-12"><h2 id="mainText">You think that you can beat my quiz?</h2></div>
-            </row>
-            <row>
-                <div class="buttonRow" style="text-align: center;">
-                    <button id="startBtn" class="btn btn-danger btn-lg">START</button>
-                    <button id="scoreBtn" class="btn btn-primary btn-lg">HIGHSCORES</button>
+    <div id = "page-container"> <!-- These two divs help with positioning the footer -->
+        <!-- Header -->
+        <header>
+            <div class = "container">
+                <div class = "row">
+                    <div class="col-md-12"><h1>~ TIMED QUIZ ~</h1></div>
                 </div>
-                <div><h3 id="startTimer"></h3></div>
-            </row>
-        </container>
-    </content>
-    
-    <!-- High Score Screen -->
-    <content class = "highscore" style="display: none;">
+            </div> 
+        </header>
 
-    </content>
+        <hr size=2>
+        <!---->
+            
+        <!-- Main content that will dynamically change -->
+        <!-- Main Menu -->
+        <content class = "mainmenu">
+            <div class = "container">
+                <div class = "row">
+                    <div class="col-md-12"><h2 id="mainText">You think that you can beat my quiz?</h2></div>
+                </div>
+                <div class = "row">
+                    <div class="col-md-6 buttonRow" style="text-align: center;">
+                        <button id="startBtn" class="btn btn-danger btn-lg">START</button>
+                    </div>
+                    <div class="col-md-6 buttonRow" style="text-align: center;">
+                        <button id="scoreBtn" class="btn btn-primary btn-lg">HIGHSCORES</button>
+                    </div>
+                    <div class="col-md-12" style="text-align: center;">
+                        <h3 id="startTimer"></h3>
+                    </div>
+                </div>
+            </div>
+        </content>
+            
+        <!-- High Score Screen -->
+        <content class = "highscore" style="display: none;">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Score</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>---</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>---</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>---</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>---</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td>---</td>
+                <td>0</td>
+                </tr>
+                </tbody>
+            </table>
+        </content>
 
-    <!-- Quiz -->
-    <content class = "quiz" style="display: none;">
-        <container>
-            <row>
-                <h3 id="quizTimer" style="text-align: center;"></h3>
-                <div class="col-md-12"> <h2 id="question"></h2> </div>
-            </row>
-            <row>
-                <div class="col-md-12 buttonRow" style="text-align: center;">
+        <!-- Quiz -->
+        <content class = "quiz" style="display: none;">
+            <div class="container">
+                <div class="row">
+                    <h3 id="quizTimer" style="text-align: center;"></h3>
+                    <div class="col-md-12"> <h2 id="question"></h2> </div>
+                </div>
+                <div>
+                    <div class="col-md-12 buttonRow" style="text-align: center;">
                     <button id="answerOne" class="btn btn-success answer"></button>
-                    <button id="answerTwo" class="btn btn-success answer"></button>
-                    <button id="answerThree" class="btn btn-success answer"></button>
+                        <button id="answerTwo" class="btn btn-success answer"></button>
+                        <button id="answerThree" class="btn btn-success answer"></button>
+                    </div>
                 </div>
-            </row>
-            <row>
-                <div class="col-md-12">
-                    <h3 id="scoreBoard" style="text-align: center;">SCORE: 0</h3>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 id="scoreBoard" style="text-align: center;">SCORE: 0</h3>
+                    </div>
+                    <div class="col-md-12">
+                        <h4 id="rightorwrong" style="text-align: center;"></h4>
+                    </div>
                 </div>
-            </row>
-        </container>
-    </content>
-    <!---->
+            </div>
+        </content>
+        <!---->
 
-    <!-- Footer -->
-    <footer>
-        <p> &copy; 2020 Jose Burgos </p>
-    </footer>
-    <!---->
+        <!-- End Screen -->
+        <content class="endScreen" style="display: none;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2></h2>
+                    </div>
+                </div>
+                <form>
+                    <div class="row"></div>
+                    <div class="form-group">
+                        <label for="initials">Initials</label>
+                        <input type="initals" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </content>
+        <!---->
+        <!-- Footer -->
+        <footer>
+            <p> &copy; 2020 Jose Burgos </p>
+        </footer>
+        <!---->
+    </div>
+
 
     <script src="./script.js"></script>
 </body>

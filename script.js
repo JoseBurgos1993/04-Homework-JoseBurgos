@@ -1,14 +1,20 @@
-const buttonRow   = document.querySelector(".buttonRow");
-const startBtn    = document.getElementById("startBtn");
-const scoreBtn    = document.getElementById("scoreBtn");
-const startTimer  = document.getElementById("startTimer");
-const quizTimer   = document.getElementById("quizTimer");
-const mainText    = document.getElementById("mainText");
-const question    = document.getElementById("question");
-const answerOne   = document.getElementById("answerOne");
-const answerTwo   = document.getElementById("answerTwo");
-const answerThree = document.getElementById("answerThree");
-const scoreBoard  = document.getElementById("scoreBoard");
+// script.js
+// By Jose Burgos
+
+// Variables \\
+const buttonRow    = document.querySelector(".buttonRow");
+const startBtn     = document.getElementById("startBtn");
+const scoreBtn     = document.getElementById("scoreBtn");
+const startTimer   = document.getElementById("startTimer");
+const quizTimer    = document.getElementById("quizTimer");
+const mainText     = document.getElementById("mainText");
+const question     = document.getElementById("question");
+const answerOne    = document.getElementById("answerOne");
+const answerTwo    = document.getElementById("answerTwo");
+const answerThree  = document.getElementById("answerThree");
+const scoreBoard   = document.getElementById("scoreBoard");
+const rightorwrong = document.getElementById("rightorwrong");
+
 let score = 0;
 let secondsLeft = 5;
 
@@ -17,6 +23,7 @@ let questions = [];
 const correctAnswers = [2,1,2,3,3,1,3,3,1,3];
 let answers = new Array(30);
 
+// Questions and Answers \\
 // Question 0 ---- Answer is 2nd
 questions[0] = "1. Who made this quiz?";
 answers[0] = "Mary";            answers[10] = "Jose";            answers[20] = "Bigfoot";
@@ -57,10 +64,15 @@ answers[8] = "Orange";       answers[18] = "Apple";        answers[28] = "Green"
 questions[9] = "Last Question. What letter does 'dinosaur' start with?";
 answers[9] = "B";            answers[19] = "A";            answers[29] = "D";
 
+// Event Listeners \\
+answerOne.addEventListener("click", function(){ choice(1); });
+answerTwo.addEventListener("click", function(){ choice(2); });
+answerThree.addEventListener("click", function(){ choice(3); });
 
-
-startBtn.addEventListener("click", function(){
+startBtn.addEventListener("click", function(){ // Starting Quiz
+    // Hides mainmenu elements for the countdown
     document.getElementsByClassName('buttonRow')[0].style.display = "none";
+    document.getElementsByClassName('buttonRow')[1].style.display = "none";
     document.getElementById('startTimer').style.display = "block";
     mainText.textContent = "Good Luck";
     secondsLeft = 5;
@@ -78,32 +90,33 @@ startBtn.addEventListener("click", function(){
     }, 1000);
 });
 
-answerOne.addEventListener("click", function(){ choice(1); });
-answerTwo.addEventListener("click", function(){ choice(2); });
-answerThree.addEventListener("click", function(){ choice(3); });
 
-function choice(num){
+// Functions \\
+function choice(num){ // This is for the eventlisteners for the answer buttons during the quiz
   console.log("Button is " + num);
-  if(num == correctAnswers[currentQuestion]){
-    score++;
+  if(num == correctAnswers[currentQuestion]){ // Correct Answer
+    score += 5;
     scoreBoard.textContent = "SCORE: " + score;
-    if(currentQuestion < 9){
-      nextQuestion();
-    } else{
-      secondsLeft = 0;
-    }
-  } else{
+    rightorwrong.textContent = "CORRECT";
+  } else{ // Wrong Answer
     secondsLeft -= 5;
     quizTimer.textContent = secondsLeft;
+    rightorwrong.textContent = "WRONG";
   }
+  nextQuestion();
 }
 
 function nextQuestion(){
   currentQuestion++;
-  question.textContent = questions[currentQuestion];
-  answerOne.textContent = answers[currentQuestion];
-  answerTwo.textContent = answers[currentQuestion + 10];
-  answerThree.textContent = answers[currentQuestion + 20];
+
+  if(currentQuestion == 10){
+    secondsLeft = 0;
+  } else{
+    question.textContent = questions[currentQuestion];
+    answerOne.textContent = answers[currentQuestion];
+    answerTwo.textContent = answers[currentQuestion + 10];
+    answerThree.textContent = answers[currentQuestion + 20];
+  }
 }
 
 function startQuiz(){
@@ -113,12 +126,13 @@ function startQuiz(){
 
   currentQuestion = 0;
   score = 0;
-  scoreBoard.textContent = "0";
+  scoreBoard.textContent = "SCORE: 0";
   secondsLeft = 30;
-  quizTimer.textContent = secondsLeft;
-  question.textContent = questions[0];
-  answerOne.textContent = answers[0];
-  answerTwo.textContent = answers[10];
+
+  quizTimer.textContent   = secondsLeft;
+  question.textContent    = questions[0];
+  answerOne.textContent   = answers[0];
+  answerTwo.textContent   = answers[10];
   answerThree.textContent = answers[20];
 
   const timerInterval = setInterval(function(){
@@ -133,6 +147,15 @@ function startQuiz(){
 
 }
 function endScreen(){
+  // Remove Quiz screen elements
+  // You scored x points!
+  // If it's a high score (top 5), give congratulations and ask if they want to save the score with initials?
+  // There will be a little form where that can be done. Probably best to have character limit.
+  // Have a submit button for that form and a go back to main menu button. If they want to redo the quiz,
+  // they can just go back and press start again.
+
+
+
   returnToMenu();
 }
 function returnToMenu(){
@@ -140,5 +163,6 @@ function returnToMenu(){
     document.getElementsByClassName('quiz')[0].style.display = "none";
     mainText.textContent = "You think that you can beat my quiz?";
     document.getElementsByClassName('buttonRow')[0].style.display = "block";
+    document.getElementsByClassName('buttonRow')[1].style.display = "block";
     document.getElementById('startTimer').style.display = "none";
 }

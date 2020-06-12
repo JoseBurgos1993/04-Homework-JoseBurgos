@@ -27,13 +27,18 @@ h2{
 .answer{
     width: 30%;
 }
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
+}
 footer {
 
     position: absolute;
     bottom: 0;
     width: 100%;
+    padding: 15px;
 
-    padding: 30px;
     clear: both;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: center;
