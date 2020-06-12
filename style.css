@@ -14,6 +14,9 @@ h2{
 .buttonRow{
     margin-top: 5%;
 }
+#backToMenu{
+    margin-top: 5px;
+}
 #startTimer{
     width: 100%;
     text-align: center;
@@ -27,7 +30,9 @@ h2{
 .answer{
     width: 30%;
 }
-
+#playerInitials{
+    width: 10%;
+}
 #page-container {
     position: relative;
     min-height: 100vh;

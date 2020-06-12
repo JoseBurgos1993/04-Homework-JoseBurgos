@@ -14,7 +14,16 @@ const answerTwo    = document.getElementById("answerTwo");
 const answerThree  = document.getElementById("answerThree");
 const scoreBoard   = document.getElementById("scoreBoard");
 const rightorwrong = document.getElementById("rightorwrong");
+const endMessage   = document.getElementById("endMessage");
+const form         = document.getElementById("form");
+const backToMenu   = document.getElementById("backToMenu");
+const submit       = document.getElementById("submit");
+const highscore    = document.getElementsByClassName("highscore");
 
+//const table        = document.getElementById("table").rows;
+console.log(table);
+
+let name = "";
 let score = 0;
 let secondsLeft = 5;
 
@@ -23,10 +32,25 @@ let questions = [];
 const correctAnswers = [2,1,2,3,3,1,3,3,1,3];
 let answers = new Array(30);
 
+// Initializing local storaging
+let recordNames = ["xxx","xxx","xxx"];
+let recordScores = [0,0,0];
+
+if(localStorage.getItem("storedNames") === null){
+  localStorage.setItem("storedNames",recordNames);
+} else{
+  recordNames = localStorage.getItem("storedNames");
+}
+if(localStorage.getItem("storedScores") === null){
+  localStorage.setItem("storedScores",recordScores);
+} else{
+  recordScores = localStorage.getItem("storedScores");
+}
+
 // Questions and Answers \\
 // Question 0 ---- Answer is 2nd
 questions[0] = "1. Who made this quiz?";
-answers[0] = "Mary";            answers[10] = "Jose";            answers[20] = "Bigfoot";
+answers[0] = "Mary";         answers[10] = "Jose";         answers[20] = "Bigfoot";
 
 // Question 1 ---- Answer is 1st
 questions[1] = "2. What sound does a cow make?";
@@ -69,13 +93,22 @@ answerOne.addEventListener("click", function(){ choice(1); });
 answerTwo.addEventListener("click", function(){ choice(2); });
 answerThree.addEventListener("click", function(){ choice(3); });
 
+backToMenu.addEventListener("click", function(){ returnToMenu(); });
+submit.addEventListener("click", function(){
+  event.preventDefault();
+  name = document.getElementById("playerInitials").value;
+  console.log("The input was: " + name);
+  changeRecords();
+  returnToMenu();
+});
+scoreBtn.addEventListener("click", function(){ highScoreScreen(); })
 startBtn.addEventListener("click", function(){ // Starting Quiz
     // Hides mainmenu elements for the countdown
     document.getElementsByClassName('buttonRow')[0].style.display = "none";
     document.getElementsByClassName('buttonRow')[1].style.display = "none";
     document.getElementById('startTimer').style.display = "block";
     mainText.textContent = "Good Luck";
-    secondsLeft = 5;
+    secondsLeft = 3;
     startTimer.textContent = secondsLeft;
 
     const timerInterval = setInterval(function(){
@@ -153,16 +186,64 @@ function endScreen(){
   // There will be a little form where that can be done. Probably best to have character limit.
   // Have a submit button for that form and a go back to main menu button. If they want to redo the quiz,
   // they can just go back and press start again.
+  
+  document.getElementsByClassName('endScreen')[0].style.display = "block";
+  document.getElementsByClassName('quiz')[0].style.display = "none";
+  
+  endMessage.textContent = "Great Job! You scored " + score + " points!";
+  if(newRecord()){
+    form.style.display = "block";
+    endMessage.TextContent = endMessage.TextContent + " That's a NEW RECORD!"
+  }
+}
 
+function newRecord(){
+  for(let i=0; i < 3; i++){
+    if(score > recordScores[i]){ return true; }
+  }
+  return false;
+}
 
+function changeRecords(){
+  if(score > recordScores[0]){
+    recordScores[2] = recordScores[1];
+    recordScores[1] = recordScores[0];
+    recordScores[0] = score;
+    
+    recordNames[2] = recordNames[1];
+    recordNames[1] = recordNames[0];
+    recordNames[0] = name;
 
-  returnToMenu();
+  } else if(score > recordScores[1]){
+    recordScores[2] = recordScores[1];
+    recordScores[1] = score;
+    
+    recordNames[2] = recordNames[1];
+    recordNames[1] = name;
+    
+  } else{
+    recordScores[2] = score;
+
+    recordNames[2] = name;
+  }
+
+}
+function highScoreScreen(){
+  document.getElementsByClassName('mainmenu')[0].style.display = "none";
+  document.getElementsByClassName('highscore')[0].style.display = "block";
+  //for(let i=1; i<6; i++){
+  //  
+  //  table.childNodes[i].childNodes[1] = recordNames[i-1];
+  //  table.childNodes[i].childNodes[2] = recordScores[i-1];
+  //}
 }
 function returnToMenu(){
-    document.getElementsByClassName('mainmenu')[0].style.display = "block";
-    document.getElementsByClassName('quiz')[0].style.display = "none";
-    mainText.textContent = "You think that you can beat my quiz?";
-    document.getElementsByClassName('buttonRow')[0].style.display = "block";
-    document.getElementsByClassName('buttonRow')[1].style.display = "block";
-    document.getElementById('startTimer').style.display = "none";
+  document.getElementsByClassName('highscore')[0].style.display = "none";
+  document.getElementsByClassName('mainmenu')[0].style.display = "block";
+  document.getElementsByClassName('quiz')[0].style.display = "none";
+  document.getElementsByClassName('endScreen')[0].style.display = "none";
+  mainText.textContent = "You think that you can beat my quiz?";
+  document.getElementsByClassName('buttonRow')[0].style.display = "block";
+  document.getElementsByClassName('buttonRow')[1].style.display = "block";
+  document.getElementById('startTimer').style.display = "none";
 }

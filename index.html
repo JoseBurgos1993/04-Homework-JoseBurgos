@@ -45,42 +45,46 @@
             
         <!-- High Score Screen -->
         <content class = "highscore" style="display: none;">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Score</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>---</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>---</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>---</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <th scope="row">4</th>
-                    <td>---</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <th scope="row">5</th>
-                    <td>---</td>
-                <td>0</td>
-                </tr>
-                </tbody>
-            </table>
+            <container>
+                <button type="back" id="backToMenu" class="btn btn-danger">Back To Menu</button>
+
+                <table id="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>---</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>---</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>---</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4</th>
+                            <td>---</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">5</th>
+                            <td>---</td>
+                        <td>0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </container>
         </content>
 
         <!-- Quiz -->
@@ -92,7 +96,7 @@
                 </div>
                 <div>
                     <div class="col-md-12 buttonRow" style="text-align: center;">
-                    <button id="answerOne" class="btn btn-success answer"></button>
+                        <button id="answerOne" class="btn btn-success answer"></button>
                         <button id="answerTwo" class="btn btn-success answer"></button>
                         <button id="answerThree" class="btn btn-success answer"></button>
                     </div>
@@ -114,20 +118,22 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2></h2>
+                        <h2 id="endMessage"></h2>
                     </div>
                 </div>
-                <form>
+                <form id="form" style="display: none;">
                     <div class="row"></div>
                     <div class="form-group">
                         <label for="initials">Initials</label>
-                        <input type="initals" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <input type="initials1" class="form-control" id="playerInitials" maxlength="3" placeholder="JDB">
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" id="submit" class="btn btn-primary">Submit</button>
                 </form>
+                <button type="back" id="backToMenu" class="btn btn-danger">Back To Menu</button>
             </div>
         </content>
         <!---->
+
         <!-- Footer -->
         <footer>
             <p> &copy; 2020 Jose Burgos </p>
