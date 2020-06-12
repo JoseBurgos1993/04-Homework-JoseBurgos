@@ -94,6 +94,7 @@ function choice(num){
     }
   } else{
     secondsLeft -= 5;
+    quizTimer.textContent = secondsLeft;
   }
 }
 
@@ -112,6 +113,7 @@ function startQuiz(){
 
   currentQuestion = 0;
   score = 0;
+  scoreBoard.textContent = "0";
   secondsLeft = 30;
   quizTimer.textContent = secondsLeft;
   question.textContent = questions[0];
