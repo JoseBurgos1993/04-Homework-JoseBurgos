@@ -24,8 +24,15 @@ h2{
 #scoreBtn{
     width: 40%;
 }
+.answer{
+    width: 30%;
+}
 footer {
-    margin-top: 15%;
+
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
     padding: 30px;
     clear: both;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
