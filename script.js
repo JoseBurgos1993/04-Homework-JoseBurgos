@@ -236,7 +236,7 @@ function returnToMenu(){
   document.getElementsByClassName('mainmenu')[0].style.display = "block";
   document.getElementsByClassName('quiz')[0].style.display = "none";
   document.getElementsByClassName('endScreen')[0].style.display = "none";
-  mainText.textContent = "You get 30 seconds. Correct answer is 5 points. Wrong answer and you lose 5 seconds. You get to save your highscore with your initials. You don't get to save if you don't get a high score.";
+  mainText.textContent = "You get 30 seconds. Correct answer is 5 points. Wrong answer and you lose 5 seconds.";
   document.getElementsByClassName('buttonRow')[0].style.display = "block";
   document.getElementsByClassName('buttonRow')[1].style.display = "block";
   document.getElementById('startTimer').style.display = "none";
