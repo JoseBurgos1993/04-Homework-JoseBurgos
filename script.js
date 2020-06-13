@@ -17,10 +17,11 @@ const rightorwrong = document.getElementById("rightorwrong");
 const endMessage   = document.getElementById("endMessage");
 const form         = document.getElementById("form");
 const backToMenu   = document.getElementById("backToMenu");
+const backToMenu2  = document.getElementById("backToMenu2");
 const submit       = document.getElementById("submit");
 const highscore    = document.getElementsByClassName("highscore");
+const table        = document.getElementById("table").rows;
 
-//const table        = document.getElementById("table").rows;
 console.log(table);
 
 let name = "";
@@ -39,12 +40,12 @@ let recordScores = [0,0,0];
 if(localStorage.getItem("storedNames") === null){
   localStorage.setItem("storedNames",recordNames);
 } else{
-  recordNames = localStorage.getItem("storedNames");
+  recordNames = localStorage.getItem("storedNames").split(',');
 }
 if(localStorage.getItem("storedScores") === null){
   localStorage.setItem("storedScores",recordScores);
 } else{
-  recordScores = localStorage.getItem("storedScores");
+  recordScores = localStorage.getItem("storedScores").split(',');
 }
 
 // Questions and Answers \\
@@ -94,6 +95,8 @@ answerTwo.addEventListener("click", function(){ choice(2); });
 answerThree.addEventListener("click", function(){ choice(3); });
 
 backToMenu.addEventListener("click", function(){ returnToMenu(); });
+backToMenu2.addEventListener("click", function(){ returnToMenu(); });
+
 submit.addEventListener("click", function(){
   event.preventDefault();
   name = document.getElementById("playerInitials").value;
@@ -226,16 +229,20 @@ function changeRecords(){
 
     recordNames[2] = name;
   }
+  localStorage.setItem("storedNames",recordNames);
+  localStorage.setItem("storedScores",recordScores);
 
 }
 function highScoreScreen(){
   document.getElementsByClassName('mainmenu')[0].style.display = "none";
   document.getElementsByClassName('highscore')[0].style.display = "block";
-  //for(let i=1; i<6; i++){
-  //  
-  //  table.childNodes[i].childNodes[1] = recordNames[i-1];
-  //  table.childNodes[i].childNodes[2] = recordScores[i-1];
-  //}
+  for(let i=1; i<4; i++){
+    table[i].cells[1].textContent = recordNames[i-1];
+    table[i].cells[2].textContent = recordScores[i-1];
+  }
+
+  //console.log("Row 2, Score = " + table[2].cells[2].textContent);
+  //console.log("recordscores[2] = " + recordScores[2]);
 }
 function returnToMenu(){
   document.getElementsByClassName('highscore')[0].style.display = "none";
