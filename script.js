@@ -1,7 +1,7 @@
 // script.js
 // By Jose Burgos
 
-// Variables \\
+// Queries \\
 const buttonRow    = document.querySelector(".buttonRow");
 const startBtn     = document.getElementById("startBtn");
 const scoreBtn     = document.getElementById("scoreBtn");
@@ -22,16 +22,12 @@ const submit       = document.getElementById("submit");
 const highscore    = document.getElementsByClassName("highscore");
 const table        = document.getElementById("table").rows;
 
-console.log(table);
-
+// Variables \\
 let name = "";
 let score = 0;
 let secondsLeft = 5;
-
 let currentQuestion = 0;
-let questions = [];
-const correctAnswers = [2,1,2,3,3,1,3,3,1,3];
-let answers = new Array(30);
+
 
 // Initializing local storaging
 let recordNames = ["xxx","xxx","xxx"];
@@ -49,43 +45,47 @@ if(localStorage.getItem("storedScores") === null){
 }
 
 // Questions and Answers \\
-// Question 0 ---- Answer is 2nd
+let questions = [];
+const correctAnswers = [2,1,2,3,3,1,3,3,1,3];
+let answers = new Array(30);
+
+// Question 0 ---- Answer is 2
 questions[0] = "1. Who made this quiz?";
 answers[0] = "Mary";         answers[10] = "Jose";         answers[20] = "Bigfoot";
 
-// Question 1 ---- Answer is 1st
+// Question 1 ---- Answer is 1
 questions[1] = "2. What sound does a cow make?";
 answers[1] = "Moo";          answers[11] = "Meow";         answers[21] = "Good Morning";
 
-// Question 2 ---- Answer is 2nd
+// Question 2 ---- Answer is 2
 questions[2] = "3. What is the capital of Albania?";
 answers[2] = "England";      answers[12] = "Tirana";       answers[22] = "Dallas";
 
-// Question 3 ---- Answer is 3rd
+// Question 3 ---- Answer is 3
 questions[3] = "4. What kind meat goes in a ham sandwich?";
 answers[3] = "More Bread";   answers[13] = "Steak";        answers[23] = "Ham";
 
-// Question 4 ---- Answer is 3rd
+// Question 4 ---- Answer is 3
 questions[4] = "5. Which answer is the correct one?";
 answers[4] = "Nope";         answers[14] = "Not This One"; answers[24] = "This One";
 
-// Question 5 ---- Answer is 1st
+// Question 5 ---- Answer is 1
 questions[5] = "6. How do you spell 'Philadelphia'?";
 answers[5] = "Philadelphia"; answers[15] = "Mexico";       answers[25] = "Philidelhpaia";
 
-// Question 6 ---- Answer is 3rd
+// Question 6 ---- Answer is 3
 questions[6] = "7. Where was Abraham Lincoln born?";
 answers[6] = "Saudi Arabia"; answers[16] = "Mars";         answers[26] = "America";
 
-// Question 7 ---- Answer is 3rd
+// Question 7 ---- Answer is 3
 questions[7] = "8. How to crack open an egg?";
 answers[7] = "A shovel";     answers[17] = "Yell at it";   answers[27] = "Try a spatula or edge of a bowl";
 
-// Question 8 ---- Answer is 1st
+// Question 8 ---- Answer is 1
 questions[8] = "9. What color is an orange?";
 answers[8] = "Orange";       answers[18] = "Apple";        answers[28] = "Green";
 
-// Question 9 ---- Answer is 3rd
+// Question 9 ---- Answer is 3
 questions[9] = "Last Question. What letter does 'dinosaur' start with?";
 answers[9] = "B";            answers[19] = "A";            answers[29] = "D";
 
@@ -100,11 +100,12 @@ backToMenu2.addEventListener("click", function(){ returnToMenu(); });
 submit.addEventListener("click", function(){
   event.preventDefault();
   name = document.getElementById("playerInitials").value;
-  console.log("The input was: " + name);
   changeRecords();
   returnToMenu();
 });
+
 scoreBtn.addEventListener("click", function(){ highScoreScreen(); })
+
 startBtn.addEventListener("click", function(){ // Starting Quiz
     // Hides mainmenu elements for the countdown
     document.getElementsByClassName('buttonRow')[0].style.display = "none";
@@ -128,6 +129,33 @@ startBtn.addEventListener("click", function(){ // Starting Quiz
 
 
 // Functions \\
+function startQuiz(){
+  
+  document.getElementsByClassName('mainmenu')[0].style.display = "none";
+  document.getElementsByClassName('quiz')[0].style.display = "block";
+
+  currentQuestion = 0;
+  score = 0;
+  scoreBoard.textContent = "SCORE: 0";
+  secondsLeft = 30;
+
+  quizTimer.textContent   = secondsLeft;
+  question.textContent    = questions[0];
+  answerOne.textContent   = answers[0];
+  answerTwo.textContent   = answers[10];
+  answerThree.textContent = answers[20];
+
+  const timerInterval = setInterval(function(){
+    secondsLeft--;
+    quizTimer.textContent = secondsLeft;
+    if(secondsLeft <= 0){
+        quizTimer.textContent = "";
+        clearInterval(timerInterval);
+        endScreen();
+    }
+  }, 1000);
+}
+
 function choice(num){ // This is for the eventlisteners for the answer buttons during the quiz
   console.log("Button is " + num);
   if(num == correctAnswers[currentQuestion]){ // Correct Answer
@@ -155,41 +183,7 @@ function nextQuestion(){
   }
 }
 
-function startQuiz(){
-  
-  document.getElementsByClassName('mainmenu')[0].style.display = "none";
-  document.getElementsByClassName('quiz')[0].style.display = "block";
-
-  currentQuestion = 0;
-  score = 0;
-  scoreBoard.textContent = "SCORE: 0";
-  secondsLeft = 30;
-
-  quizTimer.textContent   = secondsLeft;
-  question.textContent    = questions[0];
-  answerOne.textContent   = answers[0];
-  answerTwo.textContent   = answers[10];
-  answerThree.textContent = answers[20];
-
-  const timerInterval = setInterval(function(){
-    secondsLeft--;
-    quizTimer.textContent = secondsLeft;
-    if(secondsLeft <= 0){
-        quizTimer.textContent = "";
-        clearInterval(timerInterval);
-        endScreen();
-    }
-    }, 1000);
-
-}
 function endScreen(){
-  // Remove Quiz screen elements
-  // You scored x points!
-  // If it's a high score (top 5), give congratulations and ask if they want to save the score with initials?
-  // There will be a little form where that can be done. Probably best to have character limit.
-  // Have a submit button for that form and a go back to main menu button. If they want to redo the quiz,
-  // they can just go back and press start again.
-  
   document.getElementsByClassName('endScreen')[0].style.display = "block";
   document.getElementsByClassName('quiz')[0].style.display = "none";
   
@@ -212,27 +206,22 @@ function changeRecords(){
     recordScores[2] = recordScores[1];
     recordScores[1] = recordScores[0];
     recordScores[0] = score;
-    
     recordNames[2] = recordNames[1];
     recordNames[1] = recordNames[0];
     recordNames[0] = name;
-
   } else if(score > recordScores[1]){
     recordScores[2] = recordScores[1];
     recordScores[1] = score;
-    
     recordNames[2] = recordNames[1];
     recordNames[1] = name;
-    
   } else{
     recordScores[2] = score;
-
     recordNames[2] = name;
   }
   localStorage.setItem("storedNames",recordNames);
   localStorage.setItem("storedScores",recordScores);
-
 }
+
 function highScoreScreen(){
   document.getElementsByClassName('mainmenu')[0].style.display = "none";
   document.getElementsByClassName('highscore')[0].style.display = "block";
@@ -240,16 +229,14 @@ function highScoreScreen(){
     table[i].cells[1].textContent = recordNames[i-1];
     table[i].cells[2].textContent = recordScores[i-1];
   }
-
-  //console.log("Row 2, Score = " + table[2].cells[2].textContent);
-  //console.log("recordscores[2] = " + recordScores[2]);
 }
+
 function returnToMenu(){
   document.getElementsByClassName('highscore')[0].style.display = "none";
   document.getElementsByClassName('mainmenu')[0].style.display = "block";
   document.getElementsByClassName('quiz')[0].style.display = "none";
   document.getElementsByClassName('endScreen')[0].style.display = "none";
-  mainText.textContent = "You think that you can beat my quiz?";
+  mainText.textContent = "You get 30 seconds. Correct answer is 5 points. Wrong answer and you lose 5 seconds. You get to save your highscore with your initials. You don't get to save if you don't get a high score.";
   document.getElementsByClassName('buttonRow')[0].style.display = "block";
   document.getElementsByClassName('buttonRow')[1].style.display = "block";
   document.getElementById('startTimer').style.display = "none";
