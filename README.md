@@ -1,6 +1,6 @@
-# 04-Homework-JoseBurgos
+# Timed Quiz
 
-There is an image titled screenshot.png in the Assets folder. It is a screenshot of my webpage. My repository may be found at https://github.com/JoseBurgos1993/04-Homework-JoseBurgos. Here is a link to the deployed web page, https://joseburgos1993.github.io/04-Homework-JoseBurgos/.
+There is an image titled screenshot.png in the Assets folder. It is a screenshot of my webpage. My repository may be found at https://github.com/JoseBurgos1993/Timed-Quiz. Here is a link to the deployed web page, https://joseburgos1993.github.io/Timed-Quiz/.
 
 For this project, I was tasked to create a timed quiz. The first screen shown is a main menu containing the basic rules of the quiz, a 'Start' button to start the quiz, and a 'Highscore' button to view the highscores. The header and the footer of the page are consistent in their size and location.
 
